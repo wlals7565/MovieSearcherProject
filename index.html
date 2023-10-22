@@ -12,8 +12,15 @@
 		<script src="index.js">
 		</script>
 		<script>
+			function scrollToTop() {
+				window.scrollTo({
+				top: 0,
+				behavior: 'smooth' // 스무스 스크롤을 사용하려면 'smooth'를 지정
+				});
+			}
+
 			window.onload = async function() {
-				await getMovies(1);
+				/*await getMovies(1);
 				showMovies();
 				let searchText = document.querySelector(".searchText");
 				searchText.addEventListener("keyup", function(event) {
@@ -24,7 +31,40 @@
 				let searchButton = document.querySelector(".searchButton");
 				searchButton.addEventListener("click", function() {
 					searchMovies(searchText.value);
+				});*/
+				//0.0.2v
+				//화면 보여주고
+				let controller = new Controller(new View("thumbnails"), new Model());
+				controller.showMain();
+				//각 버튼들 설정해주고
+				let leftButton = document.querySelector("#leftButton");
+				let rightButton = document.querySelector("#rightButton");
+				let searchText = document.querySelector(".searchText");
+				let searchButton = document.querySelector(".searchButton");
+				let pageNum = document.querySelector("#page");
+
+				leftButton.addEventListener("click", ()=>{
+					if(controller.pageDown()){
+						pageNum.textContent = parseInt(pageNum.textContent)-1;
+						scrollToTop();
+				}});
+				rightButton.addEventListener("click", ()=>{
+					if(controller.pageUp()){
+						pageNum.textContent = parseInt(pageNum.textContent)+1;
+						scrollToTop();
+					}});
+					
+				searchText.addEventListener("keyup", function(event) {
+				if (event.key === "Enter") {
+					controller.query(event.target.value);
+					pageNum.textContent = 1;
+					}
 				});
+				searchButton.addEventListener("click", function() {
+					controller.query(searchText.value);
+					pageNum.textContent = 1;
+				});
+				
 			}
 		</script>
 	</head>
@@ -37,89 +77,20 @@
 				formats to work correctly.
 			-->
 				<section id="banner"><div class="inner">
-						<header><h1>영화 리스트</h1>
+						<header id="startViewPoint">
+							<h1>영화 리스트</h1>
 							<input class="searchText" type="text"  style="display: inline-block; width: 80%; height: 50px;" width="auto">
 							<button class="searchButton"id="btn" style="display: inline-block; background-image: url('images/search.png'); width: 50px; height: 50px; border: none; background-size: cover;"></button>
 						</header>
 					</div>
-				</section><!-- Main --><div id="main">
+				</section><!-- Main -->
+				<div id="main">
 					<div class="inner">
 
 					<!-- Boxes -->
 						<div class="thumbnails">
-
-							<div class="box">
-								<a href="https://youtu.be/s6zR2T9vn2c" class="image fit"><img src="https://image.tmdb.org/t/p/w200/3bhkrj58Vtu7enYsRolD1fZdja1.jpg" alt="" width="600" height="338"></a>
-								<div class="inner">
-									<h3>Nascetur nunc varius commodo</h3>
-									<p style="text-align: left;">Interdum amet accumsan placerat commodo ut amet aliquam blandit nunc tempor lobortis nunc non. Mi accumsan.</p>
-									<a href="https://youtu.be/s6zR2T9vn2c" class="button fit" data-poptrox="youtube,800x400">Watch</a>
-								</div>
-							</div>
-
-							<div class="box">
-								<a href="https://youtu.be/s6zR2T9vn2c" class="image fit"><img src="images/pic02.jpg" alt="" width="600" height="338"></a>
-								<div class="inner">
-									<h3>Nascetur nunc varius commodo</h3>
-									<p>Interdum amet accumsan placerat commodo ut amet aliquam blandit nunc tempor lobortis nunc non. Mi accumsan.</p>
-									<a href="https://youtu.be/s6zR2T9vn2c" class="button style2 fit" data-poptrox="youtube,800x400">Watch</a>
-								</div>
-							</div>
-
-							<div class="box">
-								<a href="https://youtu.be/s6zR2T9vn2c" class="image fit"><img src="images/pic03.jpg" alt="" width="600" height="338"></a>
-								<div class="inner">
-									<h3>Nascetur nunc varius commodo</h3>
-									<p>Interdum amet accumsan placerat commodo ut amet aliquam blandit nunc tempor lobortis nunc non. Mi accumsan.</p>
-									<a href="https://youtu.be/s6zR2T9vn2c" class="button style3 fit" data-poptrox="youtube,800x400">Watch</a>
-								</div>
-							</div>
-
-							<div class="box">
-								<a href="https://youtu.be/s6zR2T9vn2c" class="image fit"><img src="images/pic04.jpg" alt="" width="600" height="338"></a>
-								<div class="inner">
-									<h3>Nascetur nunc varius commodo</h3>
-									<p>Interdum amet accumsan placerat commodo ut amet aliquam blandit nunc tempor lobortis nunc non. Mi accumsan.</p>
-									<a href="https://youtu.be/s6zR2T9vn2c" class="button style2 fit" data-poptrox="youtube,800x400">Watch</a>
-								</div>
-							</div>
-
-							<div class="box">
-								<a href="https://youtu.be/s6zR2T9vn2c" class="image fit"><img src="images/pic05.jpg" alt="" width="600" height="338"></a>
-								<div class="inner">
-									<h3>Nascetur nunc varius commodo</h3>
-									<p>Interdum amet accumsan placerat commodo ut amet aliquam blandit nunc tempor lobortis nunc non. Mi accumsan.</p>
-									<a href="https://youtu.be/s6zR2T9vn2c" class="button style3 fit" data-poptrox="youtube,800x400">Watch</a>
-								</div>
-							</div>
-
-							<div class="box">
-								<a href="https://youtu.be/s6zR2T9vn2c" class="image fit"><img src="images/pic06.jpg" alt="" width="600" height="338"></a>
-								<div class="inner">
-									<h3>Nascetur nunc varius commodo</h3>
-									<p>Interdum amet accumsan placerat commodo ut amet aliquam blandit nunc tempor lobortis nunc non. Mi accumsan.</p>
-									<a href="https://youtu.be/s6zR2T9vn2c" class="button fit" data-poptrox="youtube,800x400">Watch</a>
-								</div>
-							</div>
-
-							<div class="box">
-								<a href="https://youtu.be/s6zR2T9vn2c" class="image fit"><img src="images/pic06.jpg" alt="" width="600" height="338"></a>
-								<div class="inner">
-									<h3>Nascetur nunc varius commodo</h3>
-									<p>Interdum amet accumsan placerat commodo ut amet aliquam blandit nunc tempor lobortis nunc non. Mi accumsan.</p>
-									<a href="https://youtu.be/s6zR2T9vn2c" class="button fit" data-poptrox="youtube,800x400">Watch</a>
-								</div>
-							</div>
-							<div class="box">
-								<a href="https://youtu.be/s6zR2T9vn2c" class="image fit"><img src="images/pic06.jpg" alt="" width="600" height="338"></a>
-								<div class="inner">
-									<h3>Nascetur nunc varius commodo</h3>
-									<p>Interdum amet accumsan placerat commodo ut amet aliquam blandit nunc tempor lobortis nunc non. Mi accumsan.</p>
-									<a href="https://youtu.be/s6zR2T9vn2c" class="button fit" data-poptrox="youtube,800x400">Watch</a>
-								</div>
-							</div>
-
 						</div>
 
 					</div>
+					<div style="text-align: center;"><button id="leftButton"style="background-color: black;">&#8592;</button><span id="page" style="font-size:xx-large">1</span><button id="rightButton"style="background-color: black;">&#8594;</button></div>
 				</div>
