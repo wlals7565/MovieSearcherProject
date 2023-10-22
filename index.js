@@ -90,15 +90,10 @@ class Controller{
     }
 
     query(query){
-        console.log("1");
         this.model.query(query);
-        console.log("2");
         this.view.initPage();
-        console.log("3");
         this.view.clearPage();
-        console.log("4");
-        this.view.fillPage(this.model.cloneMovies[0]);
-        console.log("5");
+        this.view.fillPage(this.model.cloneMovies[this.view.page]);
     }
 
 
@@ -151,7 +146,7 @@ class Model{
                 }
             }
         }
-        if(array != []){
+        if(array,length != 0){
             this.cloneMovies.push(array.slice());
         }
 
