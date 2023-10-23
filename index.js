@@ -146,10 +146,9 @@ class Model{
                 }
             }
         }
-        if(array,length != 0){
+        if(array.length != 0){
             this.cloneMovies.push(array.slice());
         }
-
     }
 
     
@@ -157,6 +156,7 @@ class Model{
 }
 /**********************************************************************************************************************************/
 //0.0.1v
+/*
 function showMovies(){
     initPage();
     for(let i=0; i<20; i++ ){
@@ -228,4 +228,4 @@ async function getMovies(page){
 
 function Init(){
 
-}
+}*/
