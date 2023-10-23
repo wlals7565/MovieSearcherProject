@@ -10,7 +10,7 @@ class View{
     //영화를 하나하나 넣는다.
     addMovie(url,title, intro, rating){
         // 새로운 .box 요소를 생성합니다.
-        var newBox = document.createElement("div");
+        let newBox = document.createElement("div");
         newBox.className = "box";
     
         // .box 요소의 내용을 설정합니다.
@@ -27,7 +27,7 @@ class View{
         `;
     
         // .thumbnails 요소를 선택합니다.
-        var thumbnails = document.querySelector(`.${this.className}`);
+        let thumbnails = document.querySelector(`.${this.className}`);
     
         // 새로운 .box 요소를 .thumbnails 요소의 자식으로 추가합니다.
         thumbnails.appendChild(newBox);
@@ -41,7 +41,7 @@ class View{
     }
     //페이지를 비웁니다.
     clearPage(){
-        var thumbnails = document.querySelector(`.${this.className}`); // 부모 요소 선택
+        let thumbnails = document.querySelector(`.${this.className}`); // 부모 요소 선택
 
         // 부모 요소의 자식 요소를 모두 제거
         while (thumbnails.firstChild) {
@@ -174,7 +174,7 @@ function searchMovies(query){
 }
 
 function initPage(){
-    var thumbnails = document.querySelector(".thumbnails"); // 부모 요소 선택
+    let thumbnails = document.querySelector(".thumbnails"); // 부모 요소 선택
 
     // 부모 요소의 자식 요소를 모두 제거
     while (thumbnails.firstChild) {
@@ -186,7 +186,7 @@ function initPage(){
 //영화 하나를 넣는다.
 function addMovie(className,url,title, intro, rating){
     // 새로운 .box 요소를 생성합니다.
-    var newBox = document.createElement("div");
+    let newBox = document.createElement("div");
     newBox.className = "box";
 
     // .box 요소의 내용을 설정합니다.
@@ -203,7 +203,7 @@ function addMovie(className,url,title, intro, rating){
     `;
 
     // .thumbnails 요소를 선택합니다.
-    var thumbnails = document.querySelector(`.${className}`);
+    let thumbnails = document.querySelector(`.${className}`);
 
     // 새로운 .box 요소를 .thumbnails 요소의 자식으로 추가합니다.
     thumbnails.appendChild(newBox);
